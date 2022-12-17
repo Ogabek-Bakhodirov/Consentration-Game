@@ -24,8 +24,7 @@ class ConsentrationView: UIView{
     init(frame: CGRect, model game: Consentration, emojiesArray: [String]) {
         super .init(frame: frame)
         self.game = game
-        self.emojiesArray += emojiesArray
-        self.emojiesArray += emojiesArray
+        self.emojiesArray = emojiesArray.shuffled()
         initViews()
     }
     
@@ -66,6 +65,11 @@ class ConsentrationView: UIView{
         }
     }
     
+    private func emojiFactory(cards: Cards) -> String {
+        let emoji = emojiesArray[cards.identifier-1]
+        return emoji
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -80,7 +84,7 @@ extension ConsentrationView: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ConsentrationCollectionCell", for: indexPath) as? ConsentrationCollectionCell else { return UICollectionViewCell() }
         
-        cell.setUI(cardModel: self.game.cards[indexPath.row], emoji: "\(self.game.cards[indexPath.row].identifier)")
+        cell.setUI(cardModel: self.game.cards[indexPath.row], emoji: emojiFactory(cards: self.game.cards[indexPath.row]))
         cell.sendCardIdentifier = { cardIdentifier in
             self.onAction?(cardIdentifier ?? 0, indexPath.row)
         }
