@@ -42,16 +42,8 @@ class ConsentrationCollectionCell: UICollectionViewCell {
         card.titleLabel?.font = .systemFont(ofSize: 50)
         card.layer.cornerRadius = 10
         card.isEnabled = !cardModel.isMatched
-        card.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)
-//        cardColorStatus(cardModel: cardModel, isMatched: cardModel.isMatched, isFaceUp: cardModel.isFaceUp)
-        
+        card.addTarget(self, action: #selector(cardTapped), for: .touchUpInside)        
         cardView.addSubview(card)
-    }
-    
-    func cardColorStatus(cardModel: Cards, isMatched: Bool, isFaceUp: Bool) {
-        self.cardModel = cardModel
-        card.backgroundColor = cardModel.isFaceUp ? .black : .orange 
-        card.backgroundColor = cardModel.isMatched ? .clear : .black
     }
     
     @objc func cardTapped() {

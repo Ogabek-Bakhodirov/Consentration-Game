@@ -34,10 +34,21 @@ class Consentration {
     }
         
     init(numberOfPairsOfCards: Int) {
+        Cards.identifierFactory = 0
         for _ in 1...numberOfPairsOfCards {
             let card = Cards()
             cards += [card, card]
         }
         self.cards.shuffle()
+    }
+    
+    func gameStatusChecker(cards: [Cards]) -> Bool{
+        var matchedCardsAmount = 0
+        for card in cards{
+            if card.isMatched {
+                matchedCardsAmount += 1
+            }
+        }
+        return matchedCardsAmount == cards.count
     }
 }

@@ -24,7 +24,7 @@ class ConsentrationView: UIView{
     init(frame: CGRect, model game: Consentration, emojiesArray: [String]) {
         super .init(frame: frame)
         self.game = game
-        self.emojiesArray = emojiesArray.shuffled()
+        self.emojiesArray = emojiesArray
         initViews()
     }
     
